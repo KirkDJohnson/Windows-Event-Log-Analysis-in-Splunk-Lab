@@ -29,7 +29,7 @@ Once I downloaded the lab files and found out they were multiple Windows Event L
 <br />
 <br />
 
-Within the questions to answer in the investigation, the first was to discoverd when the user cyberjunkie first logged in to the machine to begin piecing together the timeline. Within Splunk I used the source type Security Logs and filtered for Event ID/Code 4626 which logs user successfully logging in. The user cyberjunkie was found to first login at 27/03/2023 14:37:09 UTC time.<br/>
+Within the questions to answer in the investigation, the first was to discover when the user cyberjunkie first logged in to the machine to begin piecing together the timeline. Within Splunk I used the source type Security Logs and filtered for Event ID/Code 4626 which logs user successfully logging in. The user cyberjunkie was found to first login at 27/03/2023 14:37:09 UTC time.<br/>
 <img src="https://github.com/user-attachments/assets/589241f7-a49f-4a76-a8fe-01cd39d78e7c" height="100%" width="100%" alt="Windows Event Logs in Splunk"/>
 <img src="https://github.com/user-attachments/assets/9a61f5f0-709c-4910-b43c-12af82c3cf90" height="100%" width="100%" alt="Windows Event Logs in Splunk"/>
 <br />
