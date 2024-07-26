@@ -2,7 +2,7 @@
 
 
 
-<h2>Description</h2> Text
+<h2>Description</h2>In this hybrid walkthrough lab, I was tasked with investigating a user suspected of taking malicious actions on the machine. I was given several Windows Event Log files and decided to upload the data into Splunk for a more efficient searching experience. Once the Event Logs were properly displayed in Splunk, the first part of my investigation was to determine when the user first logged in. Using Search Processing Language (SPL), I changed the source to Windows Security Logs with Event ID 4624, which logs successful logins. Once the exact time the user logged in was determined, it was hinted that the user had changed the native firewall rules. I then switched the source logs to Windows Firewall and immediately discovered a suspicious, likely malicious log where the added firewall rule read "Metasploit C2 Bypass." However, the user was listed as "NOT_TRANSLATED." To determine if the malicious user added the rule, I went back to the original login log and found their Security Identifier (SID), a unique identifier assigned to users when logged in. The SID matched the Modifying User's SID in the Firewall log, confirming it was the same user. Furthermore, it was stated that the native antivirus detected a threat, which I was to investigate further. Changing the source logs to Windows Defender and researching the Event IDs related to Windows Defender, Event IDs 1116 and 1117, revealed that the antivirus detected and quarantined the hacktool SharpHound, which is used in Active Directory enumeration. 
 <br />
 
 
@@ -46,47 +46,19 @@ The next question metnioned that the user had changed audit policy on the machin
 <img src="https://github.com/user-attachments/assets/cf5457e5-419d-44b7-9829-fc778ee5add2" height="100%" width="100%" alt="Windows Event Logs in Splunk"/>
 <br />
 <br />
-Text<br/>
-<img src="" height="100%" width="100%" alt="Windows Event Logs in Splunk"/>
+Next, it was revealed the native anti-virus idnetified a threat and performed actions what it found. With that knowledge, I again researched for Event IDs relted to Windows Defender, and came accross two 1116 and 1117. Within Splunk changing the source of logs to Windows Defender Operational with the Event ID 1116, I discovered Windows Defender detected the hack tool called SharpHound. With Evend ID 1117, it showed that 100% of actions performed by Windows Defenders were quartining files adn programs meaning that SharpHound was quarintined. <br/>
+<img src="https://github.com/user-attachments/assets/a7f0e0e0-01e2-4a5d-a103-b606aef328f0" height="100%" width="100%" alt="Windows Event Logs in Splunk"/>
+<img src="https://github.com/user-attachments/assets/ae3f003b-653b-468a-95f6-61416696c550" height="100%" width="100%" alt="Windows Event Logs in Splunk"/>
+<img src="https://github.com/user-attachments/assets/022465bf-2eab-4b86-a8c7-3bc00dc687ee" height="100%" width="100%" alt="Windows Event Logs in Splunk"/>
 <br />
 <br />
-Text<br/>
-<img src="" height="100%" width="100%" alt="Windows Event Logs in Splunk"/>
+The last question mentioned that it is suspected that the malicious user had deleted some logs and I was to find out which ones. I again researched teh Event ID for Event Logs being delted and found it to be Event ID 104, and querying for that in Splunk showed that in within the time of cyberjunkie being logged in, the Microsoft-Windows-Windows Firewall With Advanced Security/Firewall Logs were cleared.<br/>
+<img src="https://github.com/user-attachments/assets/0379cab3-c947-41f3-bafb-9961c628bc2f" height="100%" width="100%" alt="Windows Event Logs in Splunk"/>
 <br />
 <br />
-Text<br/>
-<img src="" height="100%" width="100%" alt="Windows Event Logs in Splunk"/>
-<br />
-<br />
-Text<br/>
-<img src="" height="100%" width="100%" alt="Windows Event Logs in Splunk"/>
-<br />
-<br />
-Text<br/>
-<img src="" height="100%" width="100%" alt="Windows Event Logs in Splunk"/>
-<br />
-<br />
-Text<br/>
-<img src="" height="100%" width="100%" alt="Windows Event Logs in Splunk"/>
-<br />
-<br />
-Text<br/>
-<img src="" height="100%" width="100%" alt="Windows Event Logs in Splunk"/>
-<br />
-<br />
-Text<br/>
-<img src="" height="100%" width="100%" alt="Windows Event Logs in Splunk"/>
-<br />
-<br />
-Text<br/>
-<img src="" height="100%" width="100%" alt="Windows Event Logs in Splunk"/>
-<br />
-<br />
-
-
 
 <h2>Thoughts</h2>
-Text
+This lab was a great refresher and practice in Windows Event Log investigations. Considering that most end users utilize Windows endpoints, being able to use the Event Logs is a valuable skill, especially if Sysmon or any other non-native logging agent is not present on the machine. While I chose to upload the Event Logs into Splunk and query them with SPL, I believe this approach is reasonable. It was simple and aligns with the role of a SOC Analyst, which involves using tools to assist in investigations. The questions in the lab were easy to follow, and I did not encounter any significant issues. If there was an Event ID I did not recognize, I could easily search for it online, where there are ample resources to find the necessary information. Overall, this was an easy yet beneficial lab to complete.
 <!--
  ```diff
 - text in red
